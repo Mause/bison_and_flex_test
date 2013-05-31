@@ -7,8 +7,12 @@ cmake_minimum_required(VERSION 2.8)
 find_package(BISON)
 find_package(FLEX)
 
-BISON_TARGET(Parser parser.y ${CMAKE_CURRENT_BINARY_DIR}/parser.cpp) # COMPILE_FLAGS "--language=c++")
-FLEX_TARGET(Scanner tokens.l ${CMAKE_CURRENT_BINARY_DIR}/tokens.cpp COMPILE_FLAGS "--header-file=${CMAKE_CURRENT_BINARY_DIR}/tokens.hpp")
+BISON_TARGET(
+    Parser ${CMAKE_CURRENT_SOURCE_DIR}/src/parser.y ${CMAKE_CURRENT_BINARY_DIR}/parser.cpp
+    COMPILE_FLAGS "-v")# --language=c++")
+FLEX_TARGET(
+    Scanner ${CMAKE_CURRENT_SOURCE_DIR}/src/tokens.l ${CMAKE_CURRENT_BINARY_DIR}/tokens.cpp
+    COMPILE_FLAGS "-v --header-file=${CMAKE_CURRENT_BINARY_DIR}/tokens.hpp") # --c++ ")
 ADD_FLEX_BISON_DEPENDENCY(Scanner Parser)
 
 message("-- Flex output: " ${FLEX_Scanner_OUTPUTS})

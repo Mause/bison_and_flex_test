@@ -24,9 +24,7 @@ main() {
     OPCODE_SET
     OPCODE_ADD
     OPCODE_SUB
-    A B C
-    X Y Z
-    I J
+    A B C X Y Z I J
     PC SP EX IA
     ADD DIV MUL SUB;
 

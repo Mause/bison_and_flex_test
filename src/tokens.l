@@ -1,7 +1,6 @@
 %{
 #include <stdio.h>
 #include "parser.hpp"
-//#include "tokens.hpp"
 %}
 
 %option noyywrap
