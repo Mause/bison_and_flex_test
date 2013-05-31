@@ -26,9 +26,7 @@ main() {
     OPCODE_SUB;
 
 %%
-commands: /* empty */
-        | commands command
-        ;
+commands: /* empty */ | commands command;
 
 command: comment | opcode | directive;
 comment: COMMENT_START ANYTHING;
