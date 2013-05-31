@@ -21,6 +21,26 @@ SUB|sub     return OPCODE_SUB;
 \]          return SQUARE_CLOSE;
 ,           return COMMA;
 [ \t]+      /* ignore whitespace */;
+
+\*           return MUL;
+\+           return ADD;
+\-           return SUB;
+\/           return DIV;
+
+A|a         return A;
+B|b         return B;
+C|c         return C;
+X|x         return X;
+Y|y         return Y;
+Z|z         return Z;
+I|i         return I;
+J|j         return J;
+
+PC|pc       return PC;
+SP|sp       return SP;
+EX|ex       return EX;
+IA|ia       return IA;
+
 %%
 
 /*.*          return ANYTHING;*/

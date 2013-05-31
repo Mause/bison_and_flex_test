@@ -23,7 +23,12 @@ main() {
     SQUARE_CLOSE
     OPCODE_SET
     OPCODE_ADD
-    OPCODE_SUB;
+    OPCODE_SUB
+    A B C
+    X Y Z
+    I J
+    PC SP EX IA
+    ADD DIV MUL SUB;
 
 %%
 commands: /* empty */ | commands command;
@@ -43,14 +48,23 @@ set_opcode: OPCODE_SET part_b separator part_a { printf("\tSET %d to %d\n", $2, 
 add_opcode: OPCODE_ADD part_b separator part_a { printf("\tADD %d to %d\n", $2, $3); };
 sub_opcode: OPCODE_SUB part_b separator part_a { printf("\tSUB %d to %d\n", $2, $3); };
 
-separator: COMMA | /* empty */
+separator: COMMA | /* empty */;
 
-part_a: part | ref_part;
+part_a: ref_part | part;
+part_b: ref_part | part;
+ref_part: SQUARE_OPEN expressions SQUARE_CLOSE;
 
-part_b: part | ref_part;
+expressions: part expression | /* empty */;
+expression: operator part | expressions;
 
-ref_part: SQUARE_OPEN part SQUARE_CLOSE;
-part: number;
+operator: MUL | DIV | ADD | SUB;
+
+part: number | register;
+
+register:
+        A | B | C | X | Y | Z | I | J |
+        PC | SP | EX | IA;
 
 number: HEX_NUMBER | DEC_NUMBER;
 %%
+
