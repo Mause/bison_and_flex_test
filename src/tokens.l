@@ -6,13 +6,11 @@
 %option noyywrap
 
 %%
-0x[0-9]+    yylval=atoi(yytext); return HEX_NUMBER;
-[0-9]+      yylval=atoi(yytext); return DEC_NUMBER;
-
 SET|set     return OPCODE_SET;
 ADD|add     return OPCODE_ADD;
 SUB|sub     return OPCODE_SUB;
 
+:           return LABEL_START;
 ;           return COMMENT_START;
 \.          return DIRECTIVE_START;
 
@@ -21,10 +19,10 @@ SUB|sub     return OPCODE_SUB;
 ,           return COMMA;
 [ \t]+      /* ignore whitespace */;
 
-\*           return MUL;
-\+           return ADD;
-\-           return SUB;
-\/           return DIV;
+\*          return MUL;
+\+          return ADD;
+\-          return SUB;
+\/          return DIV;
 
 A|a         return A;
 B|b         return B;
@@ -39,6 +37,10 @@ PC|pc       return PC;
 SP|sp       return SP;
 EX|ex       return EX;
 IA|ia       return IA;
+
+0x[0-9]+                        yylval.number=atoi(yytext); return HEX_NUMBER;
+[0-9]+                          yylval.number=atoi(yytext); return DEC_NUMBER;
+[a-zA-Z][a-zA-Z0-9]*            yylval.string=strdup(yytext); return WORD;
 
 %%
 
