@@ -6,9 +6,9 @@
 %option noyywrap
 
 %%
-SET|set     return OPCODE_SET;
-ADD|add     return OPCODE_ADD;
-SUB|sub     return OPCODE_SUB;
+[Ss][Ee][Tt]     return OPCODE_SET;
+[Aa][Dd]{2}      return OPCODE_ADD;
+[Ss][Uu][Bb]     return OPCODE_SUB;
 
 :           return LABEL_START;
 ;           return COMMENT_START;
